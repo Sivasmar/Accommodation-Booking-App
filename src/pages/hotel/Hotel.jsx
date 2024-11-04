@@ -1,4 +1,3 @@
-
 import "./hotel.css";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
@@ -45,14 +44,15 @@ const Hotel = () => {
 
   const handleMove = (direction) => {
     let newSlideNumber;
+    const totalSlides = photos.length;
 
     if (direction === "l") {
-      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
+      newSlideNumber = slideNumber === 0 ? totalSlides - 1 : slideNumber - 1;
     } else {
-      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
+      newSlideNumber = slideNumber === totalSlides - 1 ? 0 : slideNumber + 1;
     }
 
-    setSlideNumber(newSlideNumber)
+    setSlideNumber(newSlideNumber);
   };
 
   return (
@@ -66,19 +66,22 @@ const Hotel = () => {
               icon={faCircleXmark}
               className="close"
               onClick={() => setOpen(false)}
+              aria-label="Close"
             />
             <FontAwesomeIcon
               icon={faCircleArrowLeft}
               className="arrow"
               onClick={() => handleMove("l")}
+              aria-label="Previous slide"
             />
             <div className="sliderWrapper">
-              <img src={photos[slideNumber].src} alt="" className="sliderImg" />
+              <img src={photos[slideNumber].src} alt={`Slide ${slideNumber + 1}`} className="sliderImg" />
             </div>
             <FontAwesomeIcon
               icon={faCircleArrowRight}
               className="arrow"
               onClick={() => handleMove("r")}
+              aria-label="Next slide"
             />
           </div>
         )}
@@ -87,7 +90,7 @@ const Hotel = () => {
           <h1 className="hotelTitle">Tower Street Apartments</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
-            <span>Elton St 125 New york</span>
+            <span>Elton St 125, New York</span>
           </div>
           <span className="hotelDistance">
             Excellent location – 500m from center
@@ -101,7 +104,7 @@ const Hotel = () => {
                 <img
                   onClick={() => handleOpen(i)}
                   src={photo.src}
-                  alt=""
+                  alt={`Photo ${i + 1} of Tower Street Apartments`}
                   className="hotelImg"
                 />
               </div>
@@ -109,7 +112,7 @@ const Hotel = () => {
           </div>
           <div className="hotelDetails">
             <div className="hotelDetailsTexts">
-              <h1 className="hotelTitle">Stay in the heart of City</h1>
+              <h1 className="hotelTitle">Stay in the heart of the City</h1>
               <p className="hotelDesc">
                 Located a 5-minute walk from St. Florian's Gate in Krakow, Tower
                 Street Apartments has accommodations with air conditioning and
@@ -118,7 +121,7 @@ const Hotel = () => {
                 and a private bathroom with shower and a hairdryer. A fridge is
                 also offered, as well as an electric tea pot and a coffee
                 machine. Popular points of interest near the apartment include
-                Cloth Hall, Main Market Square and Town Hall Tower. The nearest
+                Cloth Hall, Main Market Square, and Town Hall Tower. The nearest
                 airport is John Paul II International Kraków–Balice, 16.1 km
                 from Tower Street Apartments, and the property offers a paid
                 airport shuttle service.
