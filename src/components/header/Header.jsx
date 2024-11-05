@@ -36,12 +36,10 @@ const Header = ({ type }) => {
   const navigate = useNavigate();
 
   const handleOption = (name, operation) => {
-    setOptions((prev) => {
-      return {
-        ...prev,
-        [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
-      };
-    });
+    setOptions((prev) => ({
+      ...prev,
+      [name]: operation === "i" ? prev[name] + 1 : prev[name] - 1,
+    }));
   };
 
   const handleSearch = () => {
@@ -106,9 +104,9 @@ const Header = ({ type }) => {
                   onClick={() => setOpenDate(!openDate)}
                   className="headerSearchText"
                 >{`${format(
-                  date[0].startDate,
+                  date[0]?.startDate || new Date(),
                   "MM/dd/yyyy"
-                )} to ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
+                )} to ${format(date[0]?.endDate || new Date(), "MM/dd/yyyy")}`}</span>
                 {openDate && (
                   <DateRange
                     editableDateInputs={true}
